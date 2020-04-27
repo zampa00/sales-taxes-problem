@@ -37,9 +37,23 @@ public class Good {
         return imported;
     }
 
+    public float getTaxesPercentage() {
+        return TaxesManager.getSaleTax(name)
+                + (isImported() ? TaxesManager.getImportTax() : 0);
+    }
+
+    public float getTaxes() {
+        return TaxesManager.round(price * getTaxesPercentage());
+    }
+
+    public float getTotalAfterTaxes() {
+        return (float) Math.round((quantity * (price + getTaxes()) * 100.0F)) / 100.0F;
+    }
+
     @Override
     public String toString() {
-        return String.format("%s %s: %s", quantity, name, price);
+        return String.format("%s %s: %.2f", quantity, name, getTotalAfterTaxes())
+                .replace(',', '.');
     }
 
     /*****************************************
@@ -63,7 +77,7 @@ public class Good {
             throw new IllegalArgumentException(String.format("Price < 0: %s", price));
         }
 
-        boolean imported = name.startsWith("imported");
+        boolean imported = name.contains("imported");
 
         return new Good(quantity, name, price, imported);
     }

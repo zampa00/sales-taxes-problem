@@ -16,6 +16,21 @@ public class Basket {
         return goods;
     }
 
+    public float getTaxes() {
+        return (float) goods.stream().mapToDouble(good -> good.getTaxes()).sum();
+    }
+
+    public float getTotal() {
+        return (float) goods.stream().mapToDouble(good -> good.getTotalAfterTaxes()).sum();
+    }
+
+    @Override
+    public String toString() {
+        String goodsList = goods.stream().map(good -> good.toString()).collect(Collectors.joining("\n"));
+
+        return String.format("%s\nSales Taxes: %.2f\nTotal: %.2f", goodsList, getTaxes(), getTotal())
+                .replace(',', '.');
+    }
 
     /**********************
      * Static constructor *
