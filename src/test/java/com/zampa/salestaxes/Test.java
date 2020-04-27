@@ -16,5 +16,6 @@ public class Test {
         Assert.assertEquals("Failed to parse quantity.", 5, quantity);
         Assert.assertEquals("Failed to parse name.", "chocolate cornet", name);
         Assert.assertEquals("Failed to parse price.", 1.99F, price, 0);
+        Assert.assertEquals("Failed to parse toString()", "5 chocolate cornet: 1.99", good.toString());
     }
 }

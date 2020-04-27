@@ -31,6 +31,10 @@ public class Good {
         return price;
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s %s: %s", quantity, name, price);
+    }
 
     /*****************************************
      * Static constructors with inputs check *
