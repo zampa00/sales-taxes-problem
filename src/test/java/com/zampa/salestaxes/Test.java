@@ -20,6 +20,18 @@ public class Test {
     }
 
     @org.junit.Test
+    public void testImported() {
+        String input1 = "5 chocolate cornet at 1.99";
+        String input2 = "5 imported chocolate cornet at 1.99";
+
+        boolean firstGoodImported = Good.build(input1).isImported();
+        boolean secondGoodImported = Good.build(input2).isImported();
+
+        Assert.assertFalse("Wrongly recognized first good as imported.", firstGoodImported);
+        Assert.assertTrue("Failed to recognize second good as imported.", secondGoodImported);
+    }
+
+    @org.junit.Test
     public void testBasketParse() {
         String input = "5 chocolate cornet at 1.99\n"
                 + "9 tangerine at 0.09\n";

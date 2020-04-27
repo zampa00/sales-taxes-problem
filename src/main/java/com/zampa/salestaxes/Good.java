@@ -8,15 +8,17 @@ public class Good {
     private int quantity;
     private String name;
     private float price;
+    private boolean imported;
 
     final static String REGEX = "(\\d+) ([a-zA-Z ]+) at (\\d+\\.?\\d+)";
     final static Pattern PATTERN = Pattern.compile(REGEX);
 
 
-    private Good(int quantity, String name, float price) {
+    private Good(int quantity, String name, float price, boolean imported) {
         this.quantity = quantity;
         this.name = name;
         this.price = price;
+        this.imported = imported;
     }
 
     public int getQuantity() {
@@ -29,6 +31,10 @@ public class Good {
 
     public float getPrice() {
         return price;
+    }
+
+    public boolean isImported() {
+        return imported;
     }
 
     @Override
@@ -57,7 +63,9 @@ public class Good {
             throw new IllegalArgumentException(String.format("Price < 0: %s", price));
         }
 
-        return new Good(quantity, name, price);
+        boolean imported = name.startsWith("imported");
+
+        return new Good(quantity, name, price, imported);
     }
 
     public static Good build(String inputString) throws IllegalArgumentException {
