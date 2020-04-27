@@ -5,9 +5,9 @@ import java.util.regex.Pattern;
 
 public class Good {
 
-    int quantity;
-    String name;
-    float price;
+    private int quantity;
+    private String name;
+    private float price;
 
     final static String REGEX = "(\\d+) ([a-zA-Z ]+) at (\\d+\\.?\\d+)";
     final static Pattern PATTERN = Pattern.compile(REGEX);
