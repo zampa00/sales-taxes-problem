@@ -26,6 +26,9 @@ public class Good {
     }
 
     public String getName() {
+        if (imported) {
+            return String.format("imported %s", name);
+        }
         return name;
     }
 
@@ -38,7 +41,7 @@ public class Good {
     }
 
     public float getTaxesPercentage() {
-        return TaxesManager.getSaleTax(name)
+        return TaxesManager.getSaleTax(getName())
                 + (isImported() ? TaxesManager.getImportTax() : 0);
     }
 
@@ -52,7 +55,7 @@ public class Good {
 
     @Override
     public String toString() {
-        return String.format("%s %s: %.2f", quantity, name, getTotalAfterTaxes())
+        return String.format("%s %s: %.2f", quantity, getName(), getTotalAfterTaxes())
                 .replace(',', '.');
     }
 
@@ -78,6 +81,9 @@ public class Good {
         }
 
         boolean imported = name.contains("imported");
+        if (imported) {
+            name = name.replace("imported ", "");
+        }
 
         return new Good(quantity, name, price, imported);
     }
