@@ -17,7 +17,7 @@ public class Basket {
     }
 
     public float getTaxes() {
-        return (float) goods.stream().mapToDouble(good -> good.getQuantity() * good.getTaxes()).sum();
+        return (float) goods.stream().mapToDouble(good -> good.getTaxes()).sum();
     }
 
     public float getTotal() {

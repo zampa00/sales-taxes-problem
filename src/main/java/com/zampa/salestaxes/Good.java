@@ -10,7 +10,7 @@ public class Good {
     private float price;
     private boolean imported;
 
-    final static String REGEX = "(\\d+) ([a-zA-Z ]+) at (\\d+\\.?\\d+)";
+    final static String REGEX = "(\\d+) ([a-zA-Z ]+) at (\\d+\\.?\\d{0,2})";
     final static Pattern PATTERN = Pattern.compile(REGEX);
 
 
@@ -46,11 +46,12 @@ public class Good {
     }
 
     public float getTaxes() {
-        return TaxesManager.round(price * getTaxesPercentage());
+        return quantity * TaxesManager.round(price * getTaxesPercentage());
     }
 
     public float getTotalAfterTaxes() {
-        return (float) Math.round((quantity * (price + getTaxes()) * 100.0F)) / 100.0F;
+        return ((float) Math.round(quantity * price * 100.0F) / 100.0F)
+                + getTaxes();
     }
 
     @Override
