@@ -8,9 +8,10 @@ public class Basket {
 
     List<Good> goods;
 
-    public Basket(List<Good> goods) {
+    private Basket(List<Good> goods) {
         this.goods = goods;
     }
+
 
     public List<Good> getGoods() {
         return goods;
